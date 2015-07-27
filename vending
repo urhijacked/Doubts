@@ -10,22 +10,23 @@ enum states
 {
 	zero=0,five=5,ten=10,fift=15,twen=20,twef=25,thir=30
 };
-void vend(enum states *state, char c)
+enum states vend(enum states state, char c)
 {
 	switch(c)
 	{
 		case 'n':
-             *state+=5;
+             state+=5;
              break;
 		case 'd':
-             *state+=10;
+             state+=10;
              break;
 		case 'q':
-             *state+=25;
+             state+=25;
              break;
         default:
              printf("WTF\n");
 	}
+	return state;
 }
 int main()
 {
@@ -38,9 +39,9 @@ int main()
 	while(state1<30)
 	{
 		printf("Enter Coin.....You have entered %d cent\n", state1);
-		scanf ("%s", &a);
+		scanf ("%s",&a);
 		if(a=='n'||a=='d'||a=='q')
-			vend(&state1, a);
+			state1=vend(state1,a);
 		else
 			printf("INSERT ONE OF ABOVE COIN...FOOOOL\n");
 	}	
