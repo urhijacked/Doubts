@@ -1,3 +1,10 @@
+/*
+When the program reaches the vend() function in while loop..instead of increasing the value each time like if I put a n(nickel) first then it shud become 5 if again I put a n it should becoome 10.......INstead its value become zero whenever vend() is called thus if I put a second n ....still it shows 5..
+Please correct it. Otherwise its gcc compiled Error Free
+PRIZE MONEY=Rs.10
+*/
+
+
 #include<stdio.h>
 enum states
 {
