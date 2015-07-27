@@ -1,0 +1,44 @@
+#include<stdio.h>
+enum states
+{
+	zero=0,five=5,ten=10,fift=15,twen=20,twef=25,thir=30
+};
+void vend(enum states *state, char c)
+{
+	switch(c)
+	{
+		case 'n':
+             *state+=5;
+             break;
+		case 'd':
+             *state+=10;
+             break;
+		case 'q':
+             *state+=25;
+             break;
+        default:
+             printf("WTF\n");
+	}
+}
+int main()
+{
+	char a;
+	do
+	{
+	enum states state1=zero;
+	printf("Welcome to TOI Newspaper Vending Machine\nCost of a newspaper: 30 cents\n");
+	printf("Please Enter coins one by one:\nn--->Nickel\nd--->Dime\nq--->Quarter\n");
+	while(state1<30)
+	{
+		printf("Enter Coin.....You have entered %d cent\n", state1);
+		scanf ("%s", &a);
+		if(a=='n'||a=='d'||a=='q')
+			vend(&state1, a);
+		else
+			printf("INSERT ONE OF ABOVE COIN...FOOOOL\n");
+	}	
+//	if(state>=30)
+		printf("Take Your Newspaper.....HAVE A NICE DAY");
+	}while(1);
+	return 0;
+}
