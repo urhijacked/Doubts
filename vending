@@ -4,15 +4,89 @@ Please correct it. Otherwise its gcc compiled Error Free
 PRIZE MONEY=Rs.10
 */
 
+#Solved for individual Input
 
 #include<stdio.h>
+#define KRED  "\x1B[31m"
+#define KNRM  "\x1B[0m"
+#define KYEL  "\x1B[33m"
 enum states
 {
-	zero=0,five=5,ten=10,fift=15,twen=20,twef=25,thir=30
+	ZERO=0,
+	FIVE=5,
+	TEN=10,
+	FIFTEEN=15,
+	TWENTy=20,
+	TWENTY_FIVE=25,
+	THIRTY=30
+};
+void vend(enum states *state, char c)
+{
+	switch(c)
+	{
+		case 'n':
+             *state+=5;
+             break;
+		case 'd':
+             *state+=10;
+             break;
+		case 'q':
+             *state+=25;
+             break;
+        default:
+             printf("WTF\n");
+	}
+}
+int main()
+{
+	char a;
+    int i;
+	do
+	{
+	enum states state1=ZERO;
+	printf("\n\n\t\t\t   %sWelcome to TOI Newspaper Vending Machine\n\n\t\t\t\tCost of a newspaper: 30 cents\n\n",KYEL);
+	printf("\t\t\t\tPlease Enter coins one by one:\n\n\t\t\t\t\tn--->Nickel\n\t\t\t\t\td--->Dime\n\t\t\t\t\tq--->Quarter\n%s", KNRM);
+	while(state1<30)
+	{
+		printf("\nEnter Coin.....You have entered %d cent\n", state1);
+		scanf (" %c", &a);
+		if(a=='n'||a=='d'||a=='q')
+			vend(&state1, a);
+    	else
+			printf("INSERT ONE OF ABOVE COIN...FOOOOL\n");
+	}
+    printf("\nYou have entered %d cents\n", state1);
+	if(state1>=30)
+		printf("\n\n\t\t\t   %sTake Your Newspaper.....HAVE A NICE DAY%s\n\n", KRED, KNRM);
+	for (i=0;i<75;i++)
+        printf("__");
+    }while(1);
+	return 0;
+}
+
+
+#Solved for string Input
+
+
+#include<stdio.h>
+#include<string.h>
+#define KRED  "\x1B[31m"
+#define KNRM  "\x1B[0m"
+#define KYEL  "\x1B[33m"
+enum states
+{
+	ZERO=0,
+	FIVE=5,
+	TEN=10,
+	FIFTEEN=15,
+	TWENTy=20,
+	TWENTY_FIVE=25,
+	THIRTY=30
 };
 enum states vend(enum states state, char c)
 {
-	switch(c)
+	if(state<30)
+    switch(c)
 	{
 		case 'n':
              state+=5;
@@ -26,27 +100,58 @@ enum states vend(enum states state, char c)
         default:
              printf("WTF\n");
 	}
-	return state;
+    if(state>=30)
+        state=30;
+    return (state);
 }
 int main()
 {
-	char a;
+	char a[50];
+    int i;
 	do
 	{
-	enum states state1=zero;
-	printf("Welcome to TOI Newspaper Vending Machine\nCost of a newspaper: 30 cents\n");
-	printf("Please Enter coins one by one:\nn--->Nickel\nd--->Dime\nq--->Quarter\n");
-	while(state1<30)
+	enum states state1=ZERO;
+	printf("\n\n\t\t\t   %sWelcome to TOI Newspaper Vending Machine\n\n\t\t\t\tCost of a newspaper: 30 cents\n\n",KYEL);
+	printf("\t\t\t\tPlease Enter coins one by one:\n\n\t\t\t\t\tn--->Nickel\n\t\t\t\t\td--->Dime\n\t\t\t\t\tq--->Quarter\n%s", KNRM);
+    printf("\nEnter Coin.....\n");
+	scanf ("%s",a);
+    printf("\n\nCurrently---->You are in state:  ZERO-------INITIAL STATE\n");
+
+	for(i=0;i<strlen(a);i++)
 	{
-		printf("Enter Coin.....You have entered %d cent\n", state1);
-		scanf ("%s",&a);
-		if(a=='n'||a=='d'||a=='q')
-			state1=vend(state1,a);
-		else
-			printf("INSERT ONE OF ABOVE COIN...FOOOOL\n");
+			if(a[i]=='n'||a[i]=='d'||a[i]=='q')
+           {
+			    state1=vend(state1, a[i]);
+                printf("For %c-------->You are in state:  ",a[i]);
+                switch(state1)
+                {
+                    case 5:
+                        printf("FIVE\n");
+                        break;
+                    case 10:
+                        printf("TEN\n");
+                        break;
+                    case 15:
+                        printf("FIFTEEN\n");
+                        break;
+                    case 20:
+                        printf("TWENTY\n");
+                        break;
+                    case 25:
+                        printf("TWENTY-FIVE\n");
+                        break;
+                    case 30:
+                        printf("THIRTY-----FINAL STATE\n");
+                        break;
+                }
+            }
+    	else
+			printf("INSERT ABOVE COINS...FOOOOL\n");
 	}	
-//	if(state>=30)
-		printf("Take Your Newspaper.....HAVE A NICE DAY");
-	}while(1);
+	if(state1>=30)
+		printf("\n\n\t\t\t   %sTake Your Newspaper.....HAVE A NICE DAY%s\n\n", KRED, KNRM);
+	for (i=0;i<75;i++)
+        printf("__");
+    }while(1);
 	return 0;
 }
